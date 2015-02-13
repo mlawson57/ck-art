@@ -1,0 +1,37 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+{% block content %}
+    <div>
+        {% include 'flash.html' %}
+    </div>
+
+    <div class="well">
+        <h4>Queued Jobs</h4>
+        {% if demo %}
+            <p style="color: red">[ DEMO MODE - No funds will actually be sent ]</p>
+        {% endif %}
+        <p>
+        {% if pending %}
+            {{ '(%s %s currently in account/%s %s pending [Send Limit: %s %s/hour])' % (balance, currency, pending, currency, limit, currency) }}
+        {% else %}
+            {{ '(%s %s currently in account [Send Limit: %s %s/hour])' % (balance, currency, limit, currency) }}
+        {% endif %}
+        </p>
+
+        <table class="table table-hover">
+            {% for job in jobs %}
+                {% include 'job.html' %}
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="well">
+        <h4>Recent Transactions</h4>
+        <p><a href="/history">See Complete History</a></p>
+        <table class="table table-hover">
+            {% for trans in transList %}
+                {% include 'transaction.html' %}
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

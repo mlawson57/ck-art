@@ -1,0 +1,186 @@
+function translate(sourceLang, destLang, sourceId, destId, loadingId) {
+    $(destId).hide();
+    $(loadingId).show();
+    $.post('/translate', {
+        text: $(sourceId).text(),
+        sourceLang: sourceLang,
+        destLang: destLang
+    }).done(function(translated) {
+        $(destId).text(translated['text'])
+        $(loadingId).hide();
+        $(destId).show();
+    }).fail(function() {
+        $(destId).text("{{ _('Error: Could not contact server.') }}");
+        $(loadingId).hide();
+        $(destId).show();
+    });
+}
+
+
+function vote(postId, val) {
+    var destId = '#v' + postId;
+    $.post('/vote', {
+        post_id: postId,
+        value: val
+    }).done(function(new_html) {
+        $(destId).html(new_html['text']);
+    }).fail(function() {
+        $(destId).html("!");
+    });
+}
+
+
+function votec(commentId, postId, postUser, val) {
+    var destId = '#vc' + commentId;
+    $.post('/votec', {
+        comment_id: commentId,
+        post_id: postId,
+        post_user: postUser,
+        value: val
+    }).done(function(new_html) {
+        $(destId).html(new_html['text']);
+    }).fail(function() {
+        $(destId).html("!");
+    });
+    }
+
+
+function hw_post(postId, type_var) {
+    $.post('/hw_post', {
+        post_id: postId,
+        type_var: type_var
+    }).done(function() {
+        if (type_var == 0) 
+          $('.p'+postId).hide();
+        else {
+          $('#ws'+postId).html('<a href="javascript:unhw_post('+postId+', 1)">unwatch</a>');
+        }
+    }).fail(function() {
+        $('#ws'+postId).html('error');
+     });
+}
+
+
+function unhw_post(postId, type_var) {
+    $.post('/unhw_post', {
+        post_id: postId,
+        type_var: type_var
+    }).done(function() {
+        if (type_var == 0) { 
+          $('.hm'+postId).hide();
+          $('.p'+postId).show();
+        } else
+          $('#ws'+postId).html('<a href="javascript:hw_post('+postId+', 1)">watch</a>');
+    }).fail(function() {
+        $('#ws'+postId).html('error');
+     });
+}
+
+
+function hide_thread(id, author) {
+    for (var $i = 0, $j = document.getElementById("c"+id).getElementsByTagName('div'); $i < $j.length; $i++) {
+        $j[$i].style.display = 'none';
+    }
+    document.getElementById("x"+id).innerHTML = '<small><a href="javascript: show_thread('+id+')">[+] by '+author+'</a></small>';
+    document.getElementById("c"+id).style.height = '0px';
+}
+
+
+function show_thread(id) {
+    for (var $i = 0, $j = document.getElementById("c"+id).getElementsByTagName('div'); $i < $j.length; $i++) 
+        $j[$i].style.display = 'inherit';
+
+    $('#c'+id).find('span').each(function() { 
+        var id = this.id;
+        if (id.substring(0, 1) == 'x')
+            $(this).text('[-]');
+    });
+}
+
+
+function get_more_thread(postId, threadId, recurseLevel) {
+    $.post('/get_more_thread', {
+        post_id: postId,
+        thread_id: threadId,
+        recurse_level: recurseLevel
+    }).done(function(new_html) {
+        $('.modal-title').html('Conversation Thread');
+        $('#bigModalBody').html(new_html['text']);
+        $('#bigModal').modal('show');
+    }).fail(function() {
+        $('#bigModalBody').html('error getting thread');
+        $('#bigModal').modal('show'); 
+     });
+}
+
+
+function show_btc_address(userName, userBTC, userQR) {
+    $('.modal-title').html('Bitcoin address for '+userName);
+    $('#bigModalBody').html(userQR);
+    $('#bigModalFooter').html('<a href="bitcoin:'+userBTC+'">'+userBTC+'</a>');
+    $('#bigModal').modal('show'); 
+}
+
+
+function clear_replies() {
+    $.post('/clear_replies', {
+    }).done(function() {
+        $('#reply_box').hide();
+        $('#clear_notice_button').hide();
+        $('.mail_img').attr('src', '/static/img/mail.png');
+        $('.container').each(function () {
+            $(this).find('span').html(function(index, text) {
+               return text.replace('<em>[new]</em>', '');
+            });
+        });
+    }).fail(function() {
+        $('#clear_notice_button').html('error');
+     });
+}
+
+
+function get_price_old() {
+    $.post('/get_price', {
+    }).done(function(new_html) {
+        $('#price').html(new_html['text']);
+    }).fail(function() {
+        $('#price').html("!");
+    });
+}
+
+
+function get_price() {
+    $.getJSON('https://api.coinkite.com/public/rates', function (json) {
+    var ret_html = '<p>'+json.rates['BTC']['USD']['pretty']+'</p>';
+    ret_html += '<p class="small_price">'+json.rates['BTC']['CAD']['pretty']+'</p>';
+    ret_html += '<p class="small_price">'+json.rates['BTC']['GBP']['pretty']+'</p>';
+    ret_html += '<p class="small_price">'+json.rates['BTC']['EUR']['pretty']+'</p>';
+    ret_html += '<p class="small_price">'+json.rates['BTC']['CNY']['pretty']+'</p>';
+    $('#price').html(ret_html);
+});
+}
+
+
+function imgError(image) {
+    image.onerror = "";
+    image.src = "/static/img/bf_icon_300.png";
+    return true;
+}
+
+
+function fetch_title() {
+    var link_val = $('#url').val();
+    $.post('/fetch_title', {
+        link_val: link_val
+    }).done(function(new_title) {
+        $('#title').val(new_title['text']);
+    }).fail(function() {
+        $('#title').val("Error during fetch");
+    });
+}
+
+$(document).ready(function(){
+   $('.dropdown-toggle').dropdown()
+});
+
+

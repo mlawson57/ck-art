@@ -1,0 +1,11 @@
+    <tr>
+        <td>
+            <div>
+                {% if trans.ck_ref == 'error' %}
+                  [{{ moment(trans.timestamp).format('YYYY-MM-DD hh:mm:ss') }}]{{ '(%s) Error: %s' % (trans.name, trans.address) }}
+                {% else %}
+                  [{{ moment(trans.timestamp).format('YYYY-MM-DD hh:mm:ss') }}]{{ "(%s) %s %s sent to '%s' (ref #: %s)" % (trans.name, trans.amount, trans.currency, trans.address, trans.ck_ref) }}
+                {% endif %}
+            </div>
+        </td>
+    </tr>

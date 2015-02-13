@@ -1,0 +1,118 @@
+.dropdown-menu:before, 
+.dropdown-menu:after {
+     border: none !important;
+     content: none !important;
+}
+input { width: 100%; }
+textarea { width: 100%; }
+.topline { padding: 5px;
+           border-top-style: solid;
+           border-top-width: 1px;
+           border-top-color: #dddddd; }
+.bottomline { padding: 5px;
+              border-bottom-style: solid;
+              border-bottom-width: 1px;
+              border-bottom-color: #dddddd; }
+.topbottomline { padding: 5px;
+                 border-top-style: solid;
+                 border-top-width: 1px;
+                 border-top-color: #dddddd;
+                 border-bottom-style: solid;
+                 border-bottom-width: 1px;
+                 border-bottom-color: #dddddd; }
+.thinline { line-height: 50%; }
+.comment_spacer { float: left;
+                color: #999999;
+                height: 25px;
+                text-align: right; }
+.comment_container { padding: 0px;
+                     border-top-style: solid;
+                     border-top-width: 1px;
+                     border-top-color: #cccccc; }
+.comment_vote { float: left;
+                padding: 6px;
+                padding-top: 3px;
+                text-align: center; }
+.commentread { font-size: 10pt;
+               margin: 0px; 
+               color: black; }
+.commentnew { font-size: 10pt;
+              margin: 0px;
+              color: #1155ff; }
+.comment_avatar { padding: 3px;
+                  position: relative;
+                  top:15px; }
+.thinmargin { margin: 0px; }
+.border_right { float: left;
+                color: #999999;
+                border-right-color: #bbbbbb;
+                border-right: 0px solid;
+                height: 25px;
+                text-align: right; }
+.no_border { float: left;
+                color: #999999;
+                border-right-color: #bbbbbb;
+                border-right: 0px; }
+.blogtext { clear: both;
+            padding: 20px; }
+.vstext { font-size: 8pt; }
+.small_price { font-size: 11pt; } 
+.small_text { font-size: 8pt; }
+.vote_arrow { color: gray;
+              border: 0;
+              line-height: 0%; }
+img.vote_arrow { border: 0px;
+                 width: 12px; }
+img.btcimg { border: 0px;
+             width: 12px;
+             position: relative;
+             top:-1px; }
+.table-hover tbody tr td { border: none; 
+                           border-top: 1px solid #eeeeee; }
+.well { background: #f5f5f5;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        webkit-border-radius: 12px;
+        -moz-border-radius: 12px;
+        border-radius: 12px; }
+.panel { background: #f5f5f5;
+         -webkit-box-shadow: none;
+         -moz-box-shadow: none;
+         box-shadow: none;
+         webkit-border-radius: 12px;
+         -moz-border-radius: 12px;
+         border-radius: 12px; }
+.navbar { text-shadow: none;
+          background: #535353;
+          padding: 10px;
+          border: 0px;
+          -webkit-box-shadow: none;
+          -moz-box-shadow: none;
+          box-shadow: none;
+          -webkit-transition: background 0.1s linear,opacity 0.1s linear;
+          -moz-transition: background 0.1s linear,opacity 0.1s linear;
+          -ms-transition: background 0.1s linear,opacity 0.1s linear;
+          -o-transition: background 0.1s linear,opacity 0.1s linear;
+          transition: background 0.1s linear,opacity 0.1s linear;
+          webkit-border-radius: 12px;
+          -moz-border-radius: 12px;
+          border-radius: 12px;
+          -webkit-font-smoothing: antialiased;
+          opacity: .9;
+          z-index: 2; }
+.navbar-inverse .navbar-nav > li > a { color: #cccccc; }
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus { color: #ffbf00; }
+.inverse-dropdown > li > a { color: #cccccc }
+.inverse-dropdown { background-color: #444444;
+                    border-color: #080808;
+                    &>li>a{
+                      color: #cccccc;
+                      &:hover{
+                        color: #ffffff;
+                        background-color: #000; }
+                    }
+                  }
+.navbar-inverse .navbar-nav > a:link { text-shadow: none; color: #cccccc; }
+.navbar-inverse .navbar-nav > a:hover, .navbar-default .navbar-nav > li > a:focus { text-shadow: none; color: #ffbf00; }
+

@@ -1,0 +1,38 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+    {% include 'flash.html' %}
+    <div class="well">
+        <h4>Create a new address</h4>
+        <form class="form-horizontal" action="" method="post" name="post">
+            {{ form.hidden_tag() }}
+            <div class="control-group{% if form.name.errors %} error{% endif %}">
+                <label class="control-label" for="name">Name:</label>
+                <div class="controls">
+                    {{ form.name(size=30, maxlength=32) }}
+                    {% for error in form.name.errors %}
+                        <span class="help-inline">[{{ error }}]</span><br>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="control-group{% if form.address.errors %} error{% endif %}">
+                <label class="control-label" for="address">Address: <small><em>This can be a coin address, e-mail, sms or nym (format as 'nym/name')</em></small></label>
+                <div class="controls">
+                    {{ form.address(size=30, maxlength=40) }}
+                    {% for error in form.address.errors %}
+                        <span class="help-inline">[{{ error }}]</span><br>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="controls">
+                    <input class="btn btn-primary" type="submit" value="Create">
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

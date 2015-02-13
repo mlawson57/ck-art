@@ -1,0 +1,141 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+{% block content %}
+    <div>
+        {% include 'flash.html' %}
+    </div>
+
+    <div class="well">
+        <div style="width: 40%; float: left;">
+            <h4>Create a new cron job</h4>
+            <small>(* required field)</small>
+            <form class="form-horizontal" action="" method="post" name="post">
+                {{ form.hidden_tag() }}
+                <div class="control-group{% if form.name.errors %} error{% endif %}">
+                    <label class="control-label" for="name">* Job Name:</label>
+                    <div class="controls">
+                        {{ form.name(size=30, maxlength=32) }}
+                        {% for error in form.name.errors %}
+                            <span class="help-inline">[{{ error }}]</span><br>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="control-group{% if form.amount.errors %} error{% endif %}">
+                    <label class="control-label" for="amount">* Amount to send:</label>
+                    <div class="controls">
+                        {{ form.amount(size=30, maxlength=20) }}
+                        {% for error in form.amount.errors %}
+                            <span class="help-inline">[{{ error }}]</span><br>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="control-group{% if form.address.errors %} error{% endif %}">
+                    <label class="control-label" for="address">* Receiving User or Address:</label>
+                    <div class="controls">
+                        {{ form.address(size=30, maxlength=40) }}
+                        {% for error in form.address.errors %}
+                            <span class="help-inline">[{{ error }}]</span><br>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="control-group{% if form.year.errors %} error{% endif %}">
+                    <label class="control-label" for="year">Year:</label>
+                    <div class="controls">
+                        {{ form.year(size=30, maxlength=40) }}
+                        {% for error in form.year.errors %}
+                            <span class="help-inline">[{{ error }}]</span><br>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="control-group{% if form.month.errors %} error{% endif %}">
+                    <label class="control-label" for="month">Month:</label>
+                    <div class="controls">
+                        {{ form.month(size=30, maxlength=40) }}
+                        {% for error in form.month.errors %}
+                            <span class="help-inline">[{{ error }}]</span><br>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="control-group{% if form.day.errors %} error{% endif %}">
+                    <label class="control-label" for="day">Day:</label>
+                    <div class="controls">
+                        {{ form.day(size=30, maxlength=40) }}
+                        {% for error in form.day.errors %}
+                            <span class="help-inline">[{{ error }}]</span><br>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="control-group{% if form.week.errors %} error{% endif %}">
+                    <label class="control-label" for="week">Week:</label>
+                    <div class="controls">
+                        {{ form.week(size=30, maxlength=40) }}
+                        {% for error in form.week.errors %}
+                            <span class="help-inline">[{{ error }}]</span><br>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="control-group{% if form.day_of_week.errors %} error{% endif %}">
+                    <label class="control-label" for="day_of_week">Day of Week:</label>
+                    <div class="controls">
+                        {{ form.day_of_week(size=30, maxlength=40) }}
+                        {% for error in form.day_of_week.errors %}
+                            <span class="help-inline">[{{ error }}]</span><br>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="control-group{% if form.hour.errors %} error{% endif %}">
+                    <label class="control-label" for="hour">Hour:</label>
+                    <div class="controls">
+                        {{ form.hour(size=30, maxlength=40) }}
+                        {% for error in form.hour.errors %}
+                            <span class="help-inline">[{{ error }}]</span><br>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="control-group{% if form.minute.errors %} error{% endif %}">
+                    <label class="control-label" for="minute">Minute:</label>
+                    <div class="controls">
+                        {{ form.minute(size=30, maxlength=40) }}
+                        {% for error in form.minute.errors %}
+                            <span class="help-inline">[{{ error }}]</span><br>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="controls">
+                        <input class="btn btn-primary" type="submit" value="Create">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div style="width: 60%; float: left; ">
+            <h4>Cron Expression Types</h4>
+
+            <p>The following table lists all the available expressions for use in the fields from year to second.
+               Multiple expression can be given in a single field, separated by commas.</p>
+
+            <table class="table-bordered">
+                <tr><td style="padding: 5px">*</td><td>Fire on every value</td></tr>
+                <tr><td style="padding: 5px">*/a</td><td>Fire every <em>a</em> values, starting from the minimum</td></tr>
+                <tr><td style="padding: 5px">a-b</td><td>Fire on any value within the <em>a-b</em> range (<em>a</em> must be smaller than <em>b</em>)</td></tr>
+                <tr><td style="padding: 5px">a-b/c</td><td>Fire every <em>c</em> values within the <em>a-b</em> range</td></tr>
+                <tr><td style="padding: 5px">xth y</td><td>Fire on the <em>x</em>-th occurrence of weekday <em>y</em> within the month</td></tr>
+                <tr><td style="padding: 5px">last x</td><td>Fire on the last occurrence of weekday <em>x</em> within the month</td></tr>
+                <tr><td style="padding: 5px">last</td><td>Fire on the last day within the month</td></tr>
+                <tr><td style="padding: 5px">x,y,z</td><td>Fire on any matching expression; can combine any number of any of the above expressions</td></tr>
+            </table>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+{% endblock %}

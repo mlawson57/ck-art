@@ -1,0 +1,24 @@
+    <tr>
+        <td>
+            <div>
+                <strong>{{ job.name }}</strong><br/>
+                {% if addresses[job.args[1]] %}
+                    {% set address_name = addresses[job.args[1]] + ' - ' %}
+                {% else %}
+                    {% set address_name = '' %}
+                {% endif %}
+                {{ "%s %s will be sent to '%s%s'" % (job.args[0], currency, address_name, job.args[1]) }}
+                <br/>
+                {% if job.trigger['interval'] %}
+                    {{ 'Interval @ (%s)' % job.trigger.interval }}
+                {% else %}
+                    Cron ({{ job.trigger|string|substring(5,-1) }})
+                {% endif %}
+                <br/>
+                {{ 'Next run time: %sUTC' % job.next_run_time }}
+                <br/>
+                <small>[ref #: {{ job.id }}]</small> |
+                <a href="/delete_job/{{ job.id }}">Delete</a>
+            </div>
+        </td>
+    </tr>

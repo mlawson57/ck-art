@@ -1,0 +1,8 @@
+    <tr>
+      <td>
+        <div>
+          {{ "%s - %s" % (address.name, address.address) }}
+          <a href="/delete_address/{{ address.address }}">Delete</a>
+        </div>
+      </td>
+    </tr>

@@ -1,0 +1,77 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+{% block content %}
+    <div>
+        {% include 'flash.html' %}
+    </div>
+
+    <div class="well">
+        <h4>Create a new interval job</h4>
+        <small>(* required field)</small>
+        <form class="form-horizontal" action="" method="post" name="post">
+            {{ form.hidden_tag() }}
+            <div class="control-group{% if form.name.errors %} error{% endif %}">
+                <label class="control-label" for="name">* Job Name:</label>
+                <div class="controls">
+                    {{ form.name(size=30, maxlength=32) }}
+                    {% for error in form.name.errors %}
+                        <span class="help-inline">[{{ error }}]</span><br>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="control-group{% if form.amount.errors %} error{% endif %}">
+                <label class="control-label" for="amount">* Amount to send:</label>
+                <div class="controls">
+                    {{ form.amount(size=30, maxlength=32) }}
+                    {% for error in form.amount.errors %}
+                        <span class="help-inline">[{{ error }}]</span><br>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="control-group{% if form.address.errors %} error{% endif %}">
+                <label class="control-label" for="address">* Receiving User or Address:</label>
+                <div class="controls">
+                    {{ form.address(size=30, maxlength=40) }}
+                    {% for error in form.address.errors %}
+                        <span class="help-inline">[{{ error }}]</span><br>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="control-group{% if form.int_val.errors %} error{% endif %}">
+                <label class="control-label" for="int_val">* Interval:</label>
+                <div class="controls">
+                    {{ form.int_val(size=5, maxlength=5) }}
+                    <select class="form-control" name="int_type" style="width: 200px">
+                        <option value="seconds">seconds</option>
+                        <option value="minutes">minutes</option>
+                        <option value="hours">hours</option>
+                        <option value="days">days</option>
+                        <option value="weeks">weeks</option>
+                    </select>
+                    {% for error in form.int_val.errors %}
+                        <span class="help-inline">[{{ error }}]</span><br>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="control-group{% if form.start_date.errors %} error{% endif %}">
+                <label class="control-label" for="start_date">Start Date: <em><small>(YYYY-MM-DD hh:mm:ss)</small></em></label>
+                <div class="controls">
+                    {{ form.start_date(size=30, maxlength=40) }}
+                    {% for error in form.start_date.errors %}
+                        <span class="help-inline">[{{ error }}]</span><br>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="controls">
+                    <input class="btn btn-primary" type="submit" value="Create">
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
